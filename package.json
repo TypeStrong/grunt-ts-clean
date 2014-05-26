@@ -1,7 +1,7 @@
 {
   "name": "grunt-ts-clean",
-  "description": "Build cleaver slideshows from grunt",
-  "version": "0.3.2",
+  "description": "Grunt plugin to cleanup TypeScript builds for release",
+  "version": "0.1.0",
   "homepage": "https://github.com/grunt-ts/grunt-ts-clean",
   "author": {
     "name": "Bart van der Schoor",
