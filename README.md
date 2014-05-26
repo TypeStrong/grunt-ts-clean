@@ -21,7 +21,7 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-ts-clean');
 ```
 
-## The "cleaver" task
+## The "grunt-ts-clean" task
 
 ### Default Options
 
