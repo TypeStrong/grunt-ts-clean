@@ -4,7 +4,7 @@
 
 [![Build Status](https://secure.travis-ci.org/grunt-ts/grunt-ts-clean.png?branch=master)](http://travis-ci.org/grunt-ts/grunt-ts-clean) [![Dependency Status](https://gemnasium.com/grunt-ts/grunt-ts-clean.png)](https://gemnasium.com/grunt-ts/grunt-ts-clean) [![NPM version](https://badge.fury.io/js/grunt-ts-clean.png)](http://badge.fury.io/js/grunt-ts-clean)
 
-Remove source-maps, declarations, <reference>-tags and crufty files to make a TypeScript build ready for distribution.
+Remove declarations, <reference>-tags, sourcemaps, sourcemap-tags,  lint files and CRLF's to make a TypeScript build ready for distribution.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -21,7 +21,7 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-ts-clean');
 ```
 
-## The "cleaver" task       
+## The "cleaver" task
 
 ### Default Options
 

@@ -17,33 +17,32 @@ module.exports = function (grunt) {
 	grunt.loadTasks('tasks');
 
 	grunt.registerTask('verify', function () {
-		var failed = [];
+		var done = this.async();
+		var expected = [
+			'foo/foo.js',
+			'index.js'
+		];
 
-		function verify(src) {
-			//what more?
-			if (grunt.file.exists(src)) {
+		var recursive = require('recursive-readdir');
+		var assert = require('assert');
+
+		recursive('test/tmp', function (err, files) {
+			if (err) {
+				done(err);
 				return;
 			}
-			var content = grunt.file.read(src);
-			if (content.length > 0) {
-				return;
-			}
-			//TODO more testing?
-			failed.push(src);
-		}
+			files = files.map(function (file) {
+				return file.replace(/\\/, '/');
+			}).sort();
 
-		//add more here
-		verify('./test/cases/example.html');
+			assert(files.length, expected.length, 'length');
 
-		if (failed.length > 0) {
-			grunt.log.error('missing output:'.red);
-			grunt.log.error(failed.join('\n'));
-			grunt.log.writeln();
-			return false;
-		}
-		else {
-			grunt.log.ok('output verified');
-		}
+			files.forEach(function (file, i) {
+				assert(files[i], expected[i], 'file ' + i);
+			});
+			grunt.log.writeln('verfied ' + files.length + ' files');
+			done();
+		});
 	});
 
 	grunt.initConfig({
@@ -82,6 +81,6 @@ module.exports = function (grunt) {
 	});
 
 
-	grunt.registerTask('test', ['clean', 'copy:test', 'ts_clean:test']);
+	grunt.registerTask('test', ['clean', 'jshint', 'copy:test', 'ts_clean:test', 'verify']);
 	grunt.registerTask('default', ['test']);
 };

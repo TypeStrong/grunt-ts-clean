@@ -1,8 +1,7 @@
 module.exports = function (grunt) {
+	'use strict';
 
 	grunt.registerMultiTask('ts_clean', 'Cleanup TypeScript compilation', function () {
-		var options = this.options({});
-
 		// lazy init
 		var fs = require('fs');
 		var path = require('path');
@@ -21,7 +20,7 @@ module.exports = function (grunt) {
 		var baseDirExp = /^\.baseDir\./;
 		var tsCommandExp = /^\.tscommand$/;
 
-		var refExp = /^[ \t]*\/\/\/[ \t]*<reference path=.*? \/?>[ \t]*$/;
+		var refExp = /^[ \t]*\/\/\/[ \t]*<reference path=.+?\/?>[ \t]*$/;
 		var sourceExp = /^[ \t]*\/\/[@#] ?sourceMapping.+$/;
 
 		function isRemoveFile(file) {
@@ -29,20 +28,14 @@ module.exports = function (grunt) {
 				return true;
 			}
 			var base = path.basename(file);
-			if (baseDirExp.test(base) || tsCommandExp.test(base)) {
-				return true;
-			}
-			return false;
+			return baseDirExp.test(base) || tsCommandExp.test(base);
 		}
 
 		function isCleanupFile(file) {
-			if (jsExp.test(file)) {
-				return true;
-			}
-			return false;
+			return jsExp.test(file);
 		}
 
-		function keepLine(line) {
+		function isKeepLine(line) {
 			return !(refExp.test(line) || sourceExp.test(line));
 		}
 
@@ -68,7 +61,7 @@ module.exports = function (grunt) {
 				else if (isCleanupFile(file)) {
 					toArray(fs.createReadStream(file)
 							.pipe(split())
-							.pipe(filter(keepLine)),
+							.pipe(filter(isKeepLine)),
 						function (err, arr) {
 							if (err) {
 								callback(err);
@@ -81,7 +74,7 @@ module.exports = function (grunt) {
 								}
 								cleaned.push(file);
 								callback();
-							})
+							});
 						}
 					);
 				}
@@ -92,14 +85,14 @@ module.exports = function (grunt) {
 		}, function (err) {
 			grunt.log.writeln('removed ' + removed.length);
 			if (removed.length > 0) {
-				removed.forEach(function(file) {
+				removed.forEach(function (file) {
 					grunt.log.writeln(file);
 				});
 			}
 
 			grunt.log.writeln('cleaned ' + cleaned.length);
 			if (cleaned.length > 0) {
-				cleaned.forEach(function(file) {
+				cleaned.forEach(function (file) {
 					grunt.log.writeln(file);
 				});
 			}
@@ -111,5 +104,5 @@ module.exports = function (grunt) {
 				done();
 			}
 		});
-	})
+	});
 };
