@@ -25,6 +25,8 @@ grunt.loadNpmTasks('grunt-ts-clean');
 
 ### Default Options
 
+**Note** use the `dot: true` configuration options to remove `.baseDir` files.
+
 ```js
 grunt.initConfig({
 	ts_clean: {
@@ -32,7 +34,8 @@ grunt.initConfig({
 			options: {
 				
 			},
-			src: ['./build/**/*']
+			src: ['./build/**/*'],
+			dot: true
 		}
 	}
 });

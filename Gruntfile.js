@@ -65,7 +65,8 @@ module.exports = function (grunt) {
 						expand: true,
 						cwd: 'test/fixtures',
 						src: ['**'],
-						dest: 'test/tmp'
+						dest: 'test/tmp',
+						dot: true
 					}
 				]
 			}
@@ -75,7 +76,8 @@ module.exports = function (grunt) {
 				options: {
 
 				},
-				src: ['./test/tmp/**/*']
+				src: ['./test/tmp/**/*'],
+				dot: true
 			}
 		}
 	});
