@@ -2,6 +2,9 @@ module.exports = function (grunt) {
 	'use strict';
 
 	grunt.registerMultiTask('ts_clean', 'Cleanup TypeScript compilation', function () {
+		var options =this.options({
+			verbose: false
+		});
 		// lazy init
 		var fs = require('fs');
 		var path = require('path');
@@ -83,18 +86,23 @@ module.exports = function (grunt) {
 				}
 			});
 		}, function (err) {
-			grunt.log.writeln('removed ' + removed.length);
-			if (removed.length > 0) {
-				removed.forEach(function (file) {
-					grunt.log.writeln(file);
-				});
-			}
 
 			grunt.log.writeln('cleaned ' + cleaned.length);
-			if (cleaned.length > 0) {
+			if (cleaned.length > 0 && options.verbose) {
+				grunt.log.writeln('');
 				cleaned.forEach(function (file) {
 					grunt.log.writeln(file);
 				});
+				grunt.log.writeln('');
+			}
+
+			grunt.log.writeln('removed ' + removed.length);
+			if (removed.length > 0 && options.verbose) {
+				grunt.log.writeln('');
+				removed.forEach(function (file) {
+					grunt.log.writeln(file);
+				});
+				grunt.log.writeln('');
 			}
 
 			if (err) {

@@ -32,7 +32,8 @@ grunt.initConfig({
 	ts_clean: {
 		build: {
 			options: {
-				
+				// set to true to print files
+				verbose: false
 			},
 			src: ['./build/**/*'],
 			dot: true
@@ -43,6 +44,7 @@ grunt.initConfig({
 
 ## History
 
+* 0.2.0 - Added verbose option
 * 0.1.1 - First release
 
 ## Contributing
