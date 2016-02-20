@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/grunt-ts/grunt-ts-clean"
+    "url": "https://github.com/TypeStrong/grunt-ts-clean"
   },
   "bugs": {
-    "url": "https://github.com/grunt-ts/grunt-ts-clean/issues"
+    "url": "https://github.com/TypeStrong/grunt-ts-clean/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/grunt-ts/grunt-ts-clean/blob/master/LICENSE-MIT"
+      "url": "https://github.com/TypeStrong/grunt-ts-clean/blob/master/LICENSE-MIT"
     }
   ],
   "keywords": [
@@ -45,6 +45,6 @@
     "recursive-readdir": "^1.1.1"
   },
   "peerDependencies": {
-    "grunt": "~0.4.1"
+    "grunt": ">=0.4.1"
   }
 }
